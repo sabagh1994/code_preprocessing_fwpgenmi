@@ -1,0 +1,35 @@
+# We will be identifying overlapping TFBS with intergenic and intronic regions
+# Make soft links for convenience
+ln -s /shared-mounts/sinhas-storage1/mayo/offer_project/pipeline/encode/hg19/tfs.bed10.sorted .
+ln -s /shared-mounts/sinhas-storage1/mayo/offer_project/pipeline/gencode/gencode.v27lift37.protein_coding.gene.bed4.sorted .
+ln -s /shared-mounts/sinhas-storage1/mayo/offer_project/pipeline/gencode/gencode.v27lift37.protein_coding.intron.bed4.sorted .
+ln -s /shared-mounts/sinhas-storage1/mayo/offer_project/pipeline/gencode/gencode.v27lift37.protein_coding.intergenic.bed4.sorted .
+
+# Make dir coords (which contain overlap coords for both files) and intersection (which is just the bed file)
+mkdir coords intersection
+intersectBed -a tfs.bed10.sorted -b gencode.v27lift37.protein_coding.intron.bed4.sorted -wa -wb > coords/tfs_intron_protein_coding_bed_coords.tsv
+intersectBed -a tfs.bed10.sorted -b gencode.v27lift37.protein_coding.intergenic.bed4.sorted -wa -wb > coords/tfs_intergenic_protein_coding_bed_coords.tsv 
+
+# Intersect coords files
+code/intersect.pl coords/tfs_intergenic_protein_coding_bed_coords.tsv > intersection/tfs_intergenic_protein_coding.bed10
+code/intersect.pl coords/tfs_intron_protein_coding_bed_coords.tsv > intersection/tfs_intron_protein_coding.bed10
+
+# Sort files
+cd intersection
+for i in *.bed10; do 
+	sort -k1,1 -k2,2n $i -o $i.sorted
+done
+
+# Get closest gene for integenic
+mkdir coords
+bedtools closest -a tfs_intergenic_protein_coding.bed10.sorted -b ../gencode.v27lift37.protein_coding.gene.bed4.sorted -d > coords/tfs_intergenic_protein_coding_closest_gene_coords.tsv
+
+# Get closest gene within 1MB
+cd ../
+awk -F $'\t' 'BEGIN{OFS=FS} {if ($15 < 1000000); print $1,$2,$3,$4"|"$14,$5,$6,$7,$8,$9,$10}' coords/tfs_intergenic_protein_coding_closest_gene_coords.tsv >> tfs_intergenic_protein_coding_with_closest_gene_1MB.bed10
+sort -k1,1 -k2,2n tfs_intergenic_protein_coding_with_closest_gene_1MB.bed10 -o tfs_intergenic_protein_coding_with_closest_gene_1MB.bed10.sorted
+
+# Concatenate intronic and intergenic bed10 files into final file
+cat tfs_intergenic_protein_coding_with_closest_gene_1MB.bed10.sorted > ../tfs_protein_coding_1MB.bed10
+cat tfs_intron_protein_coding.bed10.sorted >> ../tfs_protein_coding_1MB.bed10
+sort -k1,1 -k2,2n tfs_protein_coding_1MB.bed10 -o tfs_protein_coding_1MB.bed10.sorted

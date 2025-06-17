@@ -1,0 +1,27 @@
+# Intersect top 10pct up/down marsk with TFBS
+cd /shared-mounts/sinhas-storage1/mayo/offer_project/pipeline/epi_analysis/output_hg19/diff_peaks/bed5/10pct
+for i in *; do
+	bedtools intersect -a /shared-mounts/sinhas-storage1/mayo/offer_project/pipeline/epi_analysis/output_hg19/tfs_protein_coding_1MB.bed10 -b $i -wa -wb > /shared-mounts/sinhas-storage1/mayo/offer_project/pipeline/epi_analysis/output_hg19/intersections/coords/$i;
+done
+cd -
+
+## Separate bed files by (TF, Target, Peak Signal) for each mark
+cd intersections/coords
+for i in *; do awk -F $'\t' '{x=gsub(/\|/,"\t",$4); print $4"\t"$15}' $i > ../gene_sets/$i; done
+
+## Get maximum signals 
+cd genesets
+mkdir -p max_by_tf/continous max_by_tf/binary
+for i in *.bed; do ./get_max_by_tf.pl $i > max_by_tf/continuous/$i; done
+cd max_by_tf/continuous
+
+# Convert to pgenmi bit vector with two feilds: up down
+for i in *; do awk '{if ($3 < 0) { print $1"\t"$2"\t0\t1"} else { print $1"\t"$2"\t1\t0"} }' $i >> ../binary/$i; done
+
+# Make by_mark genesets
+cd ../../../;
+for i in *.bed; do x=`echo $i | sed -e "s/\.bed//g"`; mkdir -p by_mark/binary/$x; done
+
+# Copy to by_mark binary, this separates out each TF to a file >$1
+cd max_by_tf/binary
+for i in *; do x=`echo $i | sed -e "s/\.bed//g"`; awk -v odir=../../by_mark/binary/$x/ '{print $2"\t"$3"\t"$4 > odir"/"$1}' $i; done 
