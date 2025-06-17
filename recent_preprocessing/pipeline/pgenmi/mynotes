@@ -1,0 +1,5 @@
+binary_two_feature contains the input file for diff mark overlapping with TFBS, the 100pct has no filter on the marks, 10pct represents the top/bottom 5% of mark regions
+presence_Evidonly contains the presence of mark in either of p0 or p6 stages with TFBS
+ACC_TFBS contains the evidence for diff Accessibility overlapping with TFBS
+ACC_TFBS_old contains the evidence for diff ACC overlapping with TFBS for old accessibility data pre-processed by Rentian
+mycode_noOverlap.bash creates the pgenmi input for diffmark without considering the overlapping regions

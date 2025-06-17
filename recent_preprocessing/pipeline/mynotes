@@ -1,0 +1,5 @@
+in the recent_preprocessing I did not redo the overlap and gencode and encode steps because the genes and encode data were preprocessed properly in pipeline_saba so i used the TFBS sites with different distance thresholds from genes in this recent preprocessing.
+
+the steps I had to redo were the epi-analysis and pgenmi folders because i had to redo the mark preprocessing, the reason being the fact that previously 
+we were aggregating p0+p2 and p4+p6 but for the new runs we have to only consider p0 vs p6
+

@@ -1,0 +1,11 @@
+1. RUN xpct_run.sh to get the top/bottom m% peaks
+2. convert the peaks to .bed format using the .py code
+
+
+xpct.sh
+
+after getting the top/bottom m% peaks the files are stored in narrowpeak fomrmat
+you should convert them to .bed files in bed5 folder
+
+
+ 

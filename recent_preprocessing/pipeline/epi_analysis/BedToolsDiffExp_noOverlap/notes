@@ -1,0 +1,42 @@
+the replicates in each stage should be intersected and I have to redo this because casey's code is fixed.
+
+what has been done in this folder:
+
+1. for each stage p0/p6 you have to intersect the mark peaks and this step was done previously by casey but i repeated it because a little issue with Casey's code was fixed 
+   intersection of replicates in each stage then take the average of peaks in the intersection
+
+2. after intersection of replicates we have to find the de peaks and be careful that peak_p6-peak_p0 should be performed
+
+3. after finding the diff peaks they are sorted and top/bottom 5% are considered only
+
+all the above steps are being done by running each mark's code seperately to get the intersection of replicates and de peak analysis.
+then you should go to final folder to get the top 5% and bottom 5% of diff peaks
+
+also to get the top m% of mark peaks (different from diff peaks) in each stage there are commands in each mark.sh scripts (the mark height is sorted and the top m% are then taken)
+
+
+
+first run "run_allMarks.sh" to get the results for all marks (instead of running each mark seperately) then go to 'final' folder to rank the diff peaks
+
+union folder in each mark directory is then used to generate the TFBS overlapping with mark presence in either of the stages (p0/p6)
+we merge p0 and p6 peaks then we sort it by the peak height and get the top 10% of peaks 
+
+
+Notes on the size of the 10pct number of regions with diff histone mark or union of p0 and p6 mark regions:
+file located at /shared-mounts/sinhas-storage1/mayo/offer_project/recent_preprocessing/pipeline/epi_analysis/BedToolsDiffExp/Union for the top 10% of the mark regions in the union of p0 and p6:
+
+9181 K27ac.bed
+6912 K27me3.bed
+6588 K4me3.bed
+13476 K4me1.bed
+
+files located at /shared-mounts/sinhas-storage1/mayo/offer_project/recent_preprocessing/pipeline/epi_analysis/BedToolsDiffExp/final/narrowPeak/10pct for the top/bottom 5% of diff peaks:
+
+13332 K27ac.narrowPeak
+11724 K27me3.narrowPeak
+21368 K4me1.narrowPeak
+8814 K4me3.narrowPeak
+
+the reason why the total number of regions for diff mark is greater than union of p0 and p6 could be becauseof the presence of some overlapping sites in p0 and p6 that lead to 2 regions in the union but 3 regions in diff mark. beacuse the change is <= 2 Folds and not 10 folds it does not matter and we could still compare the results of using these two different evidenve types.
+
+ 

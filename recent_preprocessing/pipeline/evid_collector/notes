@@ -1,0 +1,5 @@
+run_link.sh makes all the linked files
+
+You need to run evidence_collector.ipynb to create all the different inputs for pgenmi 
+
+

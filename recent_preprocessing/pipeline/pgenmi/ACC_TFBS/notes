@@ -1,0 +1,5 @@
+the codes used here are the same as the ones used for histone marks in upper directory and the only difference is that instead of having the mark name we have DiffAcc for the mark name.
+
+
+in the upper directory there is a folder called TFBS_ACC_old. please ignore it because it contains the analysis for the old ATACseq data in which you were only provided with differential accessibility instead of original peaks
+

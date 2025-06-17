@@ -1,0 +1,3 @@
+I just considered the P0_high and P6_high files containing the regions with significant accessibility change and I did no extra filtering on it like the one performed for diff mark analysis (taking onlu top/bottom 5% of sorted peaks)
+
+maybe after they provide me with the right dataset I could do the extra filtering (sort by the change in acc)

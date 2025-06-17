@@ -1,0 +1,24 @@
+Examinte the NOTES files in the following order
+
+1. gencode => (gene locations in genome)
+2. encode => (TF Binding profiles from ENCODE)
+3. overlap => (finding the TFBS associated with genes. Output of this step is used for TFBS-only evidence later as well)
+4. epi_analysis/BedToolsDiffExp => (finding the diff mark peaks locations + presence of mark in either of the stages (p0/p6))
+5. epi_analysis/output_hg19 => (intersection of step4 with TFBS from step 3 + binarizing the evidence)
+6. ACC_analysis => (finding the diff ACC regions and intersecting with TFBS from step 3 + binarizing the evidence)
+   step 6 was done using the old ACC data in which they did not provide me with the original peaks 
+   instead they gave me the differential peaks
+
+6.1 epi_analysis/BedToolsDiffExp_ACC and epi_analysis/output_hg19_ACC
+    it is the same as steps 4 and 5 for histone marks
+
+7. pgenmi => (generating pgenmi evidence vectors, the evidence is separated by TFs)
+8. evid_collector => (aggregation of evidence in step 7, i.e. bringing the evidence of all TFs together, 
+                      + generation of up/down-regulated genes evidence)
+
+Let me know if you have any questions
+Casey Hanson
+caseyrhanson@gmail.com
+
+
+

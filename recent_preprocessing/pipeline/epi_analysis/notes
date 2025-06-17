@@ -1,0 +1,3 @@
+the folders with _ACC in their names are associated with the ATACSeq data analysis (the new data that arrived) the ones without _ACC are associated with histone mark analysis
+
+BedToolsDiffExp_noOverlap folder contains the regions that are present only in one stage. the differential mark at the overlapping regions of p0 and p6 is not considered  
