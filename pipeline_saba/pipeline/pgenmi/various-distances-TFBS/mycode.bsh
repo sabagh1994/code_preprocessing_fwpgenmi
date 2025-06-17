@@ -1,0 +1,15 @@
+## EDIT: the relative directories may be incorrect as I moved this directory from output_hg19
+
+addr="/shared-mounts/sinhas-storage1/mayo/offer_project/pipeline_saba/pipeline/"
+tag="200Kb"
+mkdir -p binary_two_feature
+mkdir -p binary_two_feature/$tag
+cd binary_two_feature
+for i in `cat ../marks.list`; do mkdir -p $tag/$i; done 
+cd ../
+#ln -s /shared-mounts/sinhas-storage1/mayo/offer_project/pipeline/gencode/protein_coding_genes.list .
+
+cd /shared-mounts/sinhas-storage1/mayo/offer_project/pipeline_saba/pipeline/epi_analysis/output_hg19/various-distances-TFBS/intersections/no-nearest-gene/$tag/by_mark_$tag/binary
+
+
+for i in *; do for j in $i/*; do $addr/pgenmi/make_input.pl $addr/pgenmi/protein_coding_genes.list $j /shared-mounts/sinhas-storage1/mayo/offer_project/data/DESeq2_results.tsv > $addr/pgenmi/various-distances-TFBS/binary_two_feature/$tag/$j; done done

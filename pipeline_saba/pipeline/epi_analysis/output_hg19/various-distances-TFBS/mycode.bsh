@@ -1,0 +1,42 @@
+#!/bin/bash
+
+
+code_addr="/shared-mounts/sinhas-storage1/mayo/offer_project/pipeline_saba/pipeline/epi_analysis/output_hg19/various-distances-TFBS/"
+tag="200Kb"
+
+mkdir intersections/coords_$tag
+mkdir intersections/gene_sets_$tag
+mkdir intersections/by_mark_$tag
+cp intersections/get_max_by_tf.pl intersections/gene_sets_$tag/
+
+cd /shared-mounts/sinhas-storage1/mayo/offer_project/pipeline/epi_analysis/output_hg19/diff_peaks/bed5/10pct
+module load glibc
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/sabag2/anaconda3/envs/bed_env/lib/
+for i in *; 
+do 
+   $code_addr/bedtools intersect -a /shared-mounts/sinhas-storage1/mayo/offer_project/pipeline_saba/pipeline/epi_analysis/output_hg19/various-distances-TFBS/tfs_protein_coding_$tag.bed10 -b $i -wa -wb > /shared-mounts/sinhas-storage1/mayo/offer_project/pipeline_saba/pipeline/epi_analysis/output_hg19/various-distances-TFBS/intersections/coords_$tag/$i;
+done
+module unload glibc
+cd -
+
+## Separate bed files by (TF, Target, Peak Signal) for each mark
+cd intersections/coords_$tag
+for i in *; do awk -F $'\t' '{x=gsub(/\|/,"\t",$4); print $4"\t"$14}' $i > ../gene_sets_$tag/$i; done
+
+## Get maximum signals 
+cd ../gene_sets_$tag
+mkdir -p max_by_tf/continuous max_by_tf/binary
+for i in *.bed; do ./get_max_by_tf.pl $i > ./max_by_tf/continuous/$i; done
+cd max_by_tf/continuous
+
+
+## Convert to pgenmi bit vector with two feilds: up down
+for i in *; do awk '{if ($3 < 0) { print $1"\t"$2"\t0\t1"} else { print $1"\t"$2"\t1\t0"} }' $i >> ../binary/$i; done
+
+## Make by_mark genesets
+cd ../../
+for i in *.bed; do x=`echo $i | sed -e "s/\.bed//g"`; mkdir -p ../by_mark_$tag/binary/$x; done
+
+## Copy to by_mark binary, this separates out each TF to a file >$1
+cd max_by_tf/binary
+for i in *; do x=`echo $i | sed -e "s/\.bed//g"`; awk -v odir=../../../by_mark_$tag/binary/$x/ '{print $2"\t"$3"\t"$4 > odir"/"$1}' $i; done 
