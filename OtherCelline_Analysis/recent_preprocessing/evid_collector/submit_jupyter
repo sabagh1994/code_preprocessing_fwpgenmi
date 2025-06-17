@@ -1,0 +1,12 @@
+Universe=vanilla
+Executable=run_jupyter
+
+getenv=true
+
+input=/dev/null
+output=./random_job_log.$(Cluster).$(Process)
+error=./random_error_log.$(Cluster).$(Process)
+
+arguments="$(Process)" 
+
+Queue 1

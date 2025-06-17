@@ -1,0 +1,10 @@
+#!/bin/bash
+#source /etc/profile.d/z00_lmod.sh
+#module use /etc/modulefiles/software/
+
+cd /shared-mounts/sinhas-storage1/mayo/offer_project/OtherCelline_Analysis/recent_preprocessing/evid_collector
+
+# getting the ip of the node
+python3.6 ./get_ip.py
+# building the instance of jupyter server on the node
+jupyter-notebook --no-browser

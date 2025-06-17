@@ -1,0 +1,14 @@
+this directory is associated with the most recent preprocessing for CRC project using blood TF chip tracks
+
+the only preprocessing steps being done in this directory are to take the TF chip tracks for blood from upper directories and find the intersection with diff mark regions (which was also processed in other directories). all these are being done in epi_analysis folder.
+
+then take the intersected profiles to make the pgenmi input in 'pgenmi' folder
+
+after making pgenmi input go to evide_collector folder to collect the evidences built in pgenmi folder
+
+
+Summary:
+
+Step 1: epi_analysis
+Step 2: pgenmi
+Step 3: evid_collector

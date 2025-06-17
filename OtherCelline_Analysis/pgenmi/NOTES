@@ -1,0 +1,17 @@
+## EDIT: the relative directories may be incorrect as I moved this directory from output_hg19
+mkdir binary_two_feature
+cd binary_two_feature
+for i in `cat ../marks.list`; do mkdir $i; done 
+cd ../
+ln -s /shared-mounts/sinhas-storage1/mayo/offer_project/pipeline/gencode/protein_coding_genes.list .
+cd ../epi_analysis/output_hg19/intersections/gene_sets/by_mark/binary/
+# Make pgenmi files
+for i in *; do for j in $i/*; do ../../../../pgenmi/make_input.pl ../../../../../../pgenmi/protein_coding_genes.list $j ../../../../../../pgenmi/DESeq2_results.tsv > ../../../../../../pgenmi/binary_two_feature/$j; done done
+
+# Run pGENMi
+./pgenmi binary_two_feature/K27ac/CTCF CTCF K27ac
+
+# Added: 3/30/2018
+mkdir binary_one_feature
+cd binary_two_feature
+for i in *; do mkdir -p ../binary_one_feature/$i; for j in $i/*; do tail -n +2 $j | gawk '{x=($4 || $5) + 0; print $1"\t"$2"\t"$3"\t"x}' > ../binary_one_feature/$j; done done 

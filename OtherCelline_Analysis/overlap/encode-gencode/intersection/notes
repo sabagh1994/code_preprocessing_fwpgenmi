@@ -1,0 +1,3 @@
+notice: because blood cell line has a lot of TFs the nearest gene threshold was not set up to 20000 and i had to set it to 50
+
+also becauss the computation is expensive I have to submit jobs for analysis (note added feb 1st 2020)
