@@ -1,0 +1,12 @@
+#!/bin/sh
+
+rm -rf pval_range_allmarks
+rm -rf height_range_allmarks
+
+file=../narrowPeak/all/DiffAcc.narrowPeak
+
+echo DiffACC > pval_range_allmarks
+awk 'BEGIN {minMinus=-1000000; maxMinus=1000000; min=1000000; max=0;}; { if($8<min && $8 != "" && $8>0) min = $8; if($8>max && $8 != "") max = $8; if($8<maxMinus && $8 != "") maxMinus = $8; if($8>minMinus && $8<0) minMinus = $8 } END {print maxMinus, minMinus, min, max}' $file >> pval_range_allmarks
+
+echo DiffACC > height_range_allmarks
+awk 'BEGIN {minMinus=-1000000; maxMinus=1000000; min=1000000; max=0;}; { if($10<min && $10 != "" && $10>0) min = $10; if($10>max && $10 != "") max = $10; if($10<maxMinus && $10 != "") maxMinus = $10; if($10>minMinus && $10<0) minMinus = $10 } END {print maxMinus, minMinus, min, max}' $file >> height_range_allmarks

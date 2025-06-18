@@ -1,0 +1,9 @@
+run code.sh to get the differential accessibility for invasive stage vs noninvasive stage
+
+pay attention:
+
+the files in p0 and p6 related to 10pct might not be accurate. the percentage might be higher. to get the right files run the code 
+with perc= 0.2 in code.sh
+
+
+run_de in mycode folder does not calculate the overlapping regions in p0 and p6. so the final diff peaks belong to regions that are unique to each stage

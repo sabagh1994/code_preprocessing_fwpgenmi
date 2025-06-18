@@ -1,0 +1,8 @@
+#!/bin/sh
+
+
+rm -rf intersections
+./mycode.bsh 10Kb
+./mycode.bsh 50Kb
+./mycode.bsh 200Kb
+./mycode.bsh 1Mb

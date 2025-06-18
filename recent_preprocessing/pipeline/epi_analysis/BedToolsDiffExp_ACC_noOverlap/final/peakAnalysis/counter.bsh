@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+# note: ''${thr}''
+
+thr=$1
+
+rm -rf count_$thr
+
+awk '($10>-'${thr}' && $10<'${thr}'){ ++count } END{ print count }' ../narrowPeak/all/DiffAcc.narrowPeak > count_$thr
+wc -l ../narrowPeak/all/DiffAcc.narrowPeak >> count_$thr
+

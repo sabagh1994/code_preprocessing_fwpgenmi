@@ -1,0 +1,11 @@
+Diff ACC overlapping with TFBS evidence generation:
+
+here we intersect the diff mark sites with TFBS the pipeline is as follows: (runall.bsh)
+1. take the TFBS file with different distance thresholds (10Kb, 50Kb, 200Kb, and 1Mb)
+2. intersect TFBS with top/bottom 5% of diff mark sites
+3. binarize the evidence: gain in the mark => 10, loss in the mark => 01
+
+Overlap of ACC peak and TFBS evidence => go to presence_onlyEvid then run run_all
+taking the overlap of TFBS and the presence of mark within TFBS in either of the stages p0 or p6 
+
+mark for the analysis of ACC data refers to DiffACC 
