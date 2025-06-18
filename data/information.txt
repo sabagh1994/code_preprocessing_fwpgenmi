@@ -1,0 +1,6 @@
+We included K4me1, K4me3, K27ac, K27me3 ChIP-seq, RNA-seq, miRNA-seq and ATAC-seq peak-calling
+results here. Each experiment contains two repeats (Rep1 and Rep2) in subfolder. 
+
+For the ATAC-seq analysis, I followed the method described in "Nfib Promotes Metastasis through 
+a Widespread Increase in Chromatin Accessibility". So I only output the bed file from DiffBind
+as P0_high peaks, P6_high peaks and no change peaks.

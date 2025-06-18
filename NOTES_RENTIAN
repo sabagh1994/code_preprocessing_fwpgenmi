@@ -1,0 +1,13 @@
+# Collaboration with Steven Offer and Rentian
+## 1. Data Download
+
+Downloaded data from [Mayo][https://securetx.mayo.edu/signiant_media_exchange/spring/main] with the following username and password:
+
+**username**: sinhas@illinois.edu
+**password**: HansonSinhas
+
+Folder, ~500Mb, called DATA was downloaded and zipped into a Bed.zip file and uploaded to this directory. The data was unziped and placed in the data directory.
+
+The zip file was put in the downloads directory.
+
+rm -r __MACOSX__

@@ -1,0 +1,18 @@
+#!/bin/sh
+
+rm -rf pval_range_allmarks
+
+./mycode.bsh K27ac Rep1 SW480-A-K27Ac-13.FCC7C5GACXX_L7_R1_ICGTAGA.PE_macs2_peaks.encodePeak
+./mycode.bsh K27ac Rep1 P6-D-K27Ac-16.FCC7C5GACXX_L8_R1_ITTGGCA.PE_macs2_peaks.encodePeak
+./mycode.bsh K27ac Rep2 2SW480-A-K27Ac-13.FCC7WFRACXX_L4_R1_ICGTAGA.PE_macs2_peaks.encodePeak
+./mycode.bsh K27ac Rep2 2P6-D-K27Ac-16.FCC7WFRACXX_L5_R1_ITTGGCA.PE_macs2_peaks.encodePeak
+
+./mycode.bsh K4me3 Rep1 SW480-A-K4me3-9.FCC7C5GACXX_L7_R1_IAAGAGG.PE_macs2_peaks.encodePeak
+./mycode.bsh K4me3 Rep1 P6-D-K4me3-12.FCC7C5GACXX_L7_R1_IGAGTCA.PE_macs2_peaks.encodePeak
+./mycode.bsh K4me3 Rep2 2SW480-A-K4me3-9.FCC7WFRACXX_L4_R1_IAAGAGG.PE_macs2_peaks.encodePeak
+./mycode.bsh K4me3 Rep2 2P6-D-K4me3-12.FCC7WFRACXX_L4_R1_IGAGTCA.PE_macs2_peaks.encodePeak
+
+./mycode.bsh K4me1 Rep1 SW480-A-K4me1-5.FCC7C5GACXX_L6_R1_IACCTCA.PE_macs2_peaks.encodePeak
+./mycode.bsh K4me1 Rep1 P6-D-K4me1-8.FCC7C5GACXX_L7_R1_IGTCGTA.PE_macs2_peaks.encodePeak
+./mycode.bsh K4me1 Rep2 2SW480-A-K4me1-5.FCC7WFRACXX_L3_R1_IACCTCA.PE_macs2_peaks.encodePeak
+./mycode.bsh K4me1 Rep2 2P6-D-K4me1-8.FCC7WFRACXX_L4_R1_IGTCGTA.PE_macs2_peaks.encodePeak

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+mark=$1
+rep=$2
+stage=$3
+file=$mark/$rep/$stage
+
+echo $mark >> pval_range_allmarks
+echo $rep >> pval_range_allmarks
+awk 'BEGIN {min=1000000; max=0;}; { if($8<min && $8 != "") min = $8; if($8>max && $8 != "") max = $8; } END {print min, max}' $file >> pval_range_allmarks
